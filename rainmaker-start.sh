@@ -11,3 +11,5 @@ fi
 vagrant up
 
 ./mount-nfs.sh
+
+echo "Rainmaker was started successfully"
