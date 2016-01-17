@@ -3,9 +3,13 @@
 script_dir=$(dirname $0)
 cd $script_dir
 
-if [[ $(vagrant status | fgrep poweroff) == "" ]]; then
-    echo 'Rainmaker is already running'
-    exit 1
+STATUS="$(vagrant status)"
+
+if [[ $(echo "$STATUS" | fgrep poweroff) == "" ]]; then
+    if [[ ! $(echo "$STATUS" | fgrep "The environment has not yet been created") ]]; then
+        echo 'Rainmaker is already running'
+        exit 1
+    fi
 fi
 
 vagrant up
