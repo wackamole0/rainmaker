@@ -3,6 +3,11 @@
 script_dir=$(dirname $0)
 rainmaker_vagrant_box_name="rainmaker/rainmaker"
 
+if [[ ! -d /etc/resolver ]]; then
+    echo 'The /etc/resolver directory is not available. On Linux, check https://github.com/azukiapp/libnss-resolver .'
+    exit 1;
+fi
+
 if [[ $(vagrant box list | fgrep $rainmaker_vagrant_box_name) != "" ]]; then
     echo 'The Rainmaker vagrant box is already installed.'
     exit 1
